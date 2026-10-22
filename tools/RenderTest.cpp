@@ -301,7 +301,9 @@ int main (int argc, char** argv)
         const double e0 = enerxia (durante, sr, 0.5, 1.5), e1 = enerxia (durante, sr, 4.5, 5.5);
         const double perda = 10.0 * std::log10 ((e1 + 1e-30) / (e0 + 1e-30));
         setParam (p, "conxelar", 0.0f);
-        const auto despois = procesar (p, juce::AudioBuffer<float> (2, 1), 4.0, 512, sr, false);
+        juce::AudioBuffer<float> silencio (2, 1);
+        silencio.clear();   // (un AudioBuffer novo non vén baleiro: en Windows trae lixo)
+        const auto despois = procesar (p, silencio, 4.0, 512, sr, false);
         const double fin = 10.0 * std::log10 ((enerxia (despois, sr, 3.0, 4.0) + 1e-30) / (e0 + 1e-30));
         check (perda > -1.0 && perda < 1.0 && fin < -40.0 && finito (durante) && pico (antes) > 0.01f, "conxelar: a cola queda e despois apágase",
                juce::String::formatted ("(%.1f dB en 4 s; ao soltar, %.0f dB)", perda, fin));
