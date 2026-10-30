@@ -64,6 +64,7 @@ private:
 
     verb::Espazo espazo;
     escoita::Teito teito;
+    escoita::Atraso atrasoL, atrasoR;   // o bypass, á par do teito (a súa anticipación)
     double sr = 48000, mestS = 0, volS = 1, bypassS = 0;
     std::atomic<float> *tipo = nullptr, *caida = nullptr, *predelay = nullptr, *brillo = nullptr, *mestura = nullptr, *difusion = nullptr,
                        *modulacion = nullptr, *graves = nullptr, *reflexions = nullptr, *anchura = nullptr, *corteGraves = nullptr,
